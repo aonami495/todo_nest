@@ -1,0 +1,12 @@
+ja:
+  activerecord:
+    attributes:
+      task:
+        statuses:
+          todo: 未着手
+          doing: 進行中
+          done: 完了
+        priorities:
+          low: 低
+          medium: 中
+          high: 高
