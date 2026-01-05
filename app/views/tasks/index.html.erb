@@ -20,7 +20,7 @@
     <%= label_tag :status, "ステータス" %>
     <%=select_tag :status,
           options_for_select(
-           Task.statuses.keys.map {|k| [k.humanize, k]},
+           Task.statuses.keys.map {|k| [t("activerecord.attributes.task.statuses.#{k}"), k ]},
            params[:status]
           ),
           include_blank: "すべて" %>

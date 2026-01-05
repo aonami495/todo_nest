@@ -36,7 +36,7 @@
 <div>
     <%= form.label :priority, style: "display: block" %>
     <%= form.select :priority,
-    Task.priorities.keys.map {|k|[t("activerecord.attribute.task.priorities.#{k}"), k ]} 
+    Task.priorities.keys.map {|k|[t("activerecord.attributes.task.priorities.#{k}"), k ]} 
     %>
 </div>
 

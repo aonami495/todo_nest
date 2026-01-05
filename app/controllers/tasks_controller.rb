@@ -1,23 +1,9 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
 
-  SORT_ORDERS = {
-    "due_on_asc" => { due_on: :asc, created_at: :desc },
-    "priority_desc" => { priority: :desc, created_at: :desc },
-    "created_at_desc" => { created_at: :desc }
-  }.freeze
-
   # GET /tasks or /tasks.json
   def index
-    @tasks = Task.all
-
-    if params[:status].present?
-      @tasks = @tasks.where(status: params[:status])
-    end
-
-    sort_key = params[:sort]
-    order_clause = SORT_ORDERS.fetch(sort_key, SORT_ORDERS["created_at_desc"])
-    @tasks = @tasks.order(order_clause)
+    @tasks = Task.with_status(params[:status]).sorted(params[:sort])
   end
 
   # GET /tasks/1 or /tasks/1.json
