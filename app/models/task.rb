@@ -18,4 +18,12 @@ scope :with_status, ->(status) {
 scope :sorted, ->(sort_key) {
   order(SORT_ORDERS.fetch(sort_key, SORT_ORDERS["created_at_desc"]))
 }
+
+def status_i18n
+  I18n.t("activerecord.attributes.task.statuses.#{status}", default: status.to_s.humanize)
+end
+
+def priority_i18n
+  I18n.t("activerecord.attributes.task.priorities.#{priority}", default: priority.to_s.humanize)
+end
 end

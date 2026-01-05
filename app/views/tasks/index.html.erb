@@ -17,7 +17,7 @@
 
 <%= form_with url: tasks_path, method: :get, local: true do %>
 <div>
-    <%= label_tag :status, "ステータス" %>
+    <%= label_tag :status, "進行度" %>
     <%=select_tag :status,
           options_for_select(
            Task.statuses.keys.map {|k| [t("activerecord.attributes.task.statuses.#{k}"), k ]},

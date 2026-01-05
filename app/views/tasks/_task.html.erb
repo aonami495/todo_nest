@@ -1,27 +1,27 @@
 <div id="<%= dom_id task %>">
     <p>
-        <strong>Title:</strong>
+        <strong><%= Task.human_attribute_name(:title) %>:</strong>
         <%= task.title %>
     </p>
 
     <p>
-        <strong>Description:</strong>
+        <strong><%= Task.human_attribute_name(:description) %>:</strong>
         <%= task.description %>
     </p>
 
     <p>
-        <strong>Due on:</strong>
+        <strong><%= Task.human_attribute_name(:due_on) %>:</strong>
         <%= task.due_on %>
     </p>
 
     <p>
-        <strong>Status:</strong>
-        <%= t("activerecord.attributes.task.statuses.#{task.status}") %>
+        <strong><%= Task.human_attribute_name(:status) %>:</strong>
+        <%= task.status_i18n %>
     </p>
 
     <p>
-        <strong>Priority:</strong>
-        <%= t("activerecord.attributes.task.priorities.#{task.priority}") %>
+        <strong><%= Task.human_attribute_name(:priority) %>:</strong>
+        <%= task.priority_i18n %>
     </p>
 
 </div>

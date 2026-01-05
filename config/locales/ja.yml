@@ -4,7 +4,7 @@ ja:
       task:
         title: タイトル
         description: 説明
-        status: ステータス
+        status: 進行度
         priority: 優先度
         statuses:
           todo: 未着手
