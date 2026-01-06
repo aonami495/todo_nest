@@ -1,43 +1,43 @@
 <p style="color: green"><%= notice %></p>
 
-<% content_for :title, "Tasks" %>
+<% content_for :title, t("tasks.index.title") %>
 
-<h1>Tasks</h1>
+<h1><%= t("tasks.index.heading") %></h1>
 
 <div id="tasks">
     <% @tasks.each do |task| %>
     <%= render task %>
     <p>
-        <%= link_to "Show this task", task %>
+        <%= link_to t("tasks.index.show"), task %>
     </p>
     <% end %>
 </div>
 
-<%= link_to "New task", new_task_path %>
+<%= link_to t("tasks.index.new_task"), new_task_path %>
 
 <%= form_with url: tasks_path, method: :get, local: true do %>
 <div>
-    <%= label_tag :status, "進行度" %>
-    <%=select_tag :status,
+    <%= label_tag :status, t("tasks.filters.status") %>
+    <%= select_tag :status,
           options_for_select(
-           Task.statuses.keys.map {|k| [t("activerecord.attributes.task.statuses.#{k}"), k ]},
-           params[:status]
+            Task.statuses.keys.map { |k| [t("activerecord.attributes.task.statuses.#{k}"), k] },
+            params[:status]
           ),
-          include_blank: "すべて" %>
+          include_blank: t("tasks.filters.all") %>
 </div>
 
 <div>
-    <%= label_tag :sort, "並び替え" %>
+    <%= label_tag :sort, t("tasks.filters.sort") %>
     <%= select_tag :sort,
-        options_for_select(
-          [
-            ["期限が早い順", "due_on_asc"],
-            ["優先度が高い順", "priority_desc"],
-            ["作成日が新しい順", "created_at_desc"]
-          ],
-          params[:sort]
-        ) %>
+          options_for_select(
+            [
+              [t("tasks.filters.sort_options.due_on_asc"), "due_on_asc"],
+              [t("tasks.filters.sort_options.priority_desc"), "priority_desc"],
+              [t("tasks.filters.sort_options.created_at_desc"), "created_at_desc"]
+            ],
+            params[:sort]
+          ) %>
 </div>
 
-<%= submit_tag "適用" %>
+<%= submit_tag t("tasks.filters.apply") %>
 <% end %>
