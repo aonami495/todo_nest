@@ -57,3 +57,7 @@ group :test do
 end
 
 gem "rails-i18n"
+
+group :test do
+  gem "minitest", "< 6"
+end

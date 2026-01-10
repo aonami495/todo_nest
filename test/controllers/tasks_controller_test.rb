@@ -10,6 +10,11 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "index works with status filter and sort order" do
+    get tasks_url, params: { status: "invalid", sort: "invalid" }
+    assert_response :success
+  end
+
   test "should get new" do
     get new_task_url
     assert_response :success
@@ -21,6 +26,14 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to task_url(Task.last)
+  end
+
+test "should not create task without title" do
+    assert_no_difference("Task.count") do
+      post tasks_url, params: { task: { title: "" } }
+    end
+
+    assert_response :unprocessable_entity
   end
 
   test "should show task" do
