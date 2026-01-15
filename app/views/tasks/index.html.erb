@@ -2,33 +2,24 @@
 
 <% content_for :title, t("tasks.index.title") %>
 
-<h1><%= t("tasks.index.heading") %></h1>
+<div class="max-w-3xl mx-auto p-6">
 
-<div id="tasks">
-    <% @tasks.each do |task| %>
-    <%= render task %>
-    <p>
-        <%= link_to t("tasks.index.show"), task %>
-    </p>
-    <% end %>
-</div>
+    <aside class="w-64 fixed top-20 left-0 h-[calc(100vh-5rem)] bg-gray-50 border-r border-gray-200 p-5 overflow-y-auto">
 
-<%= link_to t("tasks.index.new_task"), new_task_path %>
-
-<%= form_with url: tasks_path, method: :get, local: true do %>
-<div>
-    <%= label_tag :status, t("tasks.filters.status") %>
-    <%= select_tag :status,
+        <%= form_with url: tasks_path, method: :get, local: true do %>
+        <div class="flex flex-col mb-4">
+            <%= label_tag :status, t("tasks.filters.status") %>
+            <%= select_tag :status,
           options_for_select(
             Task.statuses.keys.map { |k| [t("activerecord.attributes.task.statuses.#{k}"), k] },
             params[:status]
           ),
           include_blank: t("tasks.filters.all") %>
-</div>
+        </div>
 
-<div>
-    <%= label_tag :sort, t("tasks.filters.sort") %>
-    <%= select_tag :sort,
+        <div>
+            <%= label_tag :sort, t("tasks.filters.sort") %>
+            <%= select_tag :sort,
           options_for_select(
             [
               [t("tasks.filters.sort_options.due_on_asc"), "due_on_asc"],
@@ -37,7 +28,25 @@
             ],
             params[:sort]
           ) %>
-</div>
+        </div>
 
-<%= submit_tag t("tasks.filters.apply") %>
-<% end %>
+    </aside>
+
+    <h1 class="text-lg font-bold mb-4">
+        <%= t("tasks.index.heading") %>
+    </h1>
+
+    <div id="tasks" class="space-y-4 mb-6">
+        <% @tasks.each do |task| %>
+        <%= render task %>
+
+        <% end %>
+    </div>
+
+    <%= link_to t("tasks.index.new_task"), new_task_path %>
+
+
+
+    <%= submit_tag t("tasks.filters.apply") %>
+    <% end %>
+</div>

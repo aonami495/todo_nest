@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <title><%= content_for(:title) || "Todo Nest" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,11 +14,30 @@
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-  </head>
+</head>
 
-  <body>
-    <%= yield %>
-  </body>
+<body>
+    <header class="fixed top-0 left-0 w-full h-20 bg-white border-b border-gray-200 flex items-center shadow-sm z-10">
+        <div class="container mx-auto px-5">
+            <div class="flex items-center">
+                <%= link_to root_path, class: "text-lg font-semibold" do %>
+                <%= image_tag "alarm-clock-regular-full.svg", alt: "TodoNest", class: "inline h-6 w-6 mr-2" %>
+                <span class="text-lg font-bold">TodoNest</span>
+                <% end %>
+
+                <%= link_to t("tasks.index.new_task"), new_task_path, class: "ml-auto inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded" %>
+            </div>
+        </div>
+    </header>
+    <div class="flex">
+        <main class="container mx-auto mt-28 px-5 flex">
+            <%= yield %>
+        </main>
+
+    </div>
+</body>
+
 </html>
