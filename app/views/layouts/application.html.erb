@@ -19,25 +19,21 @@
     <%= javascript_importmap_tags %>
 </head>
 
-<body>
-    <header class="fixed top-0 left-0 w-full h-20 bg-white border-b border-gray-200 flex items-center shadow-sm z-10">
+<body class="bg-gray-50">
+    <header class="fixed top-0 left-0 w-full h-16 bg-white border-b border-gray-200 flex items-center shadow-sm z-10">
         <div class="container mx-auto px-5">
             <div class="flex items-center">
-                <%= link_to root_path, class: "text-lg font-semibold" do %>
-                <%= image_tag "alarm-clock-regular-full.svg", alt: "TodoNest", class: "inline h-6 w-6 mr-2" %>
-                <span class="text-lg font-bold">TodoNest</span>
+                <%= link_to root_path, class: "flex items-center gap-2" do %>
+                <span class="text-lg font-bold text-gray-900">TodoNest</span>
                 <% end %>
 
-                <%= link_to t("tasks.index.new_task"), new_task_path, class: "ml-auto inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded" %>
+                <%= link_to t("tasks.index.new_task"), new_task_path, class: "ml-auto inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition-colors" %>
             </div>
         </div>
     </header>
-    <div class="flex">
-        <main class="container mx-auto mt-28 px-5 flex">
-            <%= yield %>
-        </main>
-
-    </div>
+    <main class="container mx-auto mt-24 px-5 pb-10">
+        <%= yield %>
+    </main>
 </body>
 
 </html>

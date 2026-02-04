@@ -1,11 +1,13 @@
 <% content_for :title, t("tasks.new.title") %>
 
-<h1><%= t("tasks.new.title") %></h1>
+<div class="max-w-2xl mx-auto">
+    <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+        <h1 class="text-xl font-bold text-gray-900 mb-6"><%= t("tasks.new.title") %></h1>
 
-<%= render "form", task: @task %>
+        <%= render "form", task: @task %>
+    </div>
 
-<br>
-
-<div>
-    <%= link_to t("tasks.new.back_to_tasks"), tasks_path %>
+    <div class="mt-4">
+        <%= link_to t("tasks.new.back_to_tasks"), tasks_path, class: "text-sm text-gray-500 hover:text-gray-700 transition-colors" %>
+    </div>
 </div>

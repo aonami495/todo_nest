@@ -1,31 +1,25 @@
-<div id="<%= dom_id task %>">
-    <p>
-        <strong><%= Task.human_attribute_name(:title) %>:</strong>
-        <%= task.title %>
-    </p>
+<div id="<%= dom_id task %>" class="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow p-5">
+    <div class="flex items-start justify-between gap-4">
+        <div class="min-w-0 flex-1">
+            <h3 class="text-base font-semibold text-gray-900 truncate">
+                <%= link_to task.title, task, class: "hover:text-blue-600 transition-colors" %>
+            </h3>
+            <% if task.description.present? %>
+            <p class="mt-1 text-sm text-gray-500 line-clamp-2"><%= task.description %></p>
+            <% end %>
+        </div>
+        <div class="flex items-center gap-2 shrink-0">
+            <%= status_badge(task) %>
+            <%= priority_badge(task) %>
+        </div>
+    </div>
 
-    <p>
-        <strong><%= Task.human_attribute_name(:description) %>:</strong>
-        <%= task.description %>
-    </p>
-
-    <p>
-        <strong><%= Task.human_attribute_name(:due_on) %>:</strong>
-        <%= task.due_on %>
-    </p>
-
-    <p>
-        <strong><%= Task.human_attribute_name(:status) %>:</strong>
-        <%= task.status_i18n %>
-    </p>
-
-    <p>
-        <strong><%= Task.human_attribute_name(:priority) %>:</strong>
-        <%= task.priority_i18n %>
-    </p>
-
-    <p>
-        <%= link_to t("tasks.index.show"), task %>
-    </p>
-
+    <div class="mt-3 flex items-center gap-4 text-xs text-gray-500">
+        <% if task.due_on.present? %>
+        <span><%= Task.human_attribute_name(:due_on) %>: <%= task.due_on %></span>
+        <% end %>
+        <span class="ml-auto">
+            <%= link_to t("tasks.index.show"), task, class: "text-blue-600 hover:text-blue-800 font-medium" %>
+        </span>
+    </div>
 </div>

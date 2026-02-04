@@ -1,52 +1,61 @@
-<p style="color: green"><%= notice %></p>
-
 <% content_for :title, t("tasks.index.title") %>
 
-<div class="max-w-3xl mx-auto p-6">
+<% if notice.present? %>
+<div class="mb-6 rounded-lg bg-green-50 border border-green-200 px-4 py-3 text-sm text-green-800">
+    <%= notice %>
+</div>
+<% end %>
 
-    <aside class="w-64 fixed top-20 left-0 h-[calc(100vh-5rem)] bg-gray-50 border-r border-gray-200 p-5 overflow-y-auto">
+<div class="flex gap-8">
+    <aside class="w-64 shrink-0">
+        <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 sticky top-24">
+            <h2 class="text-sm font-semibold text-gray-900 mb-4"><%= t("tasks.filters.status") %> / <%= t("tasks.filters.sort") %></h2>
+            <%= form_with url: tasks_path, method: :get, local: true do %>
+            <div class="mb-4">
+                <%= label_tag :status, t("tasks.filters.status"), class: "block text-sm font-medium text-gray-700 mb-1" %>
+                <%= select_tag :status,
+                    options_for_select(
+                        Task.statuses.keys.map { |k| [t("activerecord.attributes.task.statuses.#{k}"), k] },
+                        params[:status]
+                    ),
+                    include_blank: t("tasks.filters.all"),
+                    class: "w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" %>
+            </div>
 
-        <%= form_with url: tasks_path, method: :get, local: true do %>
-        <div class="flex flex-col mb-4">
-            <%= label_tag :status, t("tasks.filters.status") %>
-            <%= select_tag :status,
-          options_for_select(
-            Task.statuses.keys.map { |k| [t("activerecord.attributes.task.statuses.#{k}"), k] },
-            params[:status]
-          ),
-          include_blank: t("tasks.filters.all") %>
+            <div class="mb-4">
+                <%= label_tag :sort, t("tasks.filters.sort"), class: "block text-sm font-medium text-gray-700 mb-1" %>
+                <%= select_tag :sort,
+                    options_for_select(
+                        [
+                            [t("tasks.filters.sort_options.due_on_asc"), "due_on_asc"],
+                            [t("tasks.filters.sort_options.priority_desc"), "priority_desc"],
+                            [t("tasks.filters.sort_options.created_at_desc"), "created_at_desc"]
+                        ],
+                        params[:sort]
+                    ),
+                    class: "w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" %>
+            </div>
+
+            <%= submit_tag t("tasks.filters.apply"), class: "w-full bg-gray-800 hover:bg-gray-900 text-white text-sm font-medium py-2 px-4 rounded-lg transition-colors cursor-pointer" %>
+            <% end %>
         </div>
-
-        <div>
-            <%= label_tag :sort, t("tasks.filters.sort") %>
-            <%= select_tag :sort,
-          options_for_select(
-            [
-              [t("tasks.filters.sort_options.due_on_asc"), "due_on_asc"],
-              [t("tasks.filters.sort_options.priority_desc"), "priority_desc"],
-              [t("tasks.filters.sort_options.created_at_desc"), "created_at_desc"]
-            ],
-            params[:sort]
-          ) %>
-        </div>
-
     </aside>
 
-    <h1 class="text-lg font-bold mb-4">
-        <%= t("tasks.index.heading") %>
-    </h1>
+    <div class="flex-1 min-w-0">
+        <h1 class="text-xl font-bold text-gray-900 mb-6">
+            <%= t("tasks.index.heading") %>
+        </h1>
 
-    <div id="tasks" class="space-y-4 mb-6">
-        <% @tasks.each do |task| %>
-        <%= render task %>
+        <div id="tasks" class="space-y-3 mb-6">
+            <% @tasks.each do |task| %>
+            <%= render task %>
+            <% end %>
+        </div>
 
+        <% if @tasks.empty? %>
+        <div class="text-center py-12 text-gray-500">
+            <p class="text-sm">タスクがありません</p>
+        </div>
         <% end %>
     </div>
-
-    <%= link_to t("tasks.index.new_task"), new_task_path %>
-
-
-
-    <%= submit_tag t("tasks.filters.apply") %>
-    <% end %>
 </div>

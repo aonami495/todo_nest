@@ -1,12 +1,15 @@
 <% content_for :title, t(".edit_task") %>
 
-<h1><%= t(".edit_task") %></h1>
+<div class="max-w-2xl mx-auto">
+    <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+        <h1 class="text-xl font-bold text-gray-900 mb-6"><%= t(".edit_task") %></h1>
 
-<%= render "form", task: @task %>
+        <%= render "form", task: @task %>
+    </div>
 
-<br>
-
-<div>
-    <%= link_to t("tasks.index.show"), @task %> |
-    <%= link_to t(".back_to_tasks"), tasks_path %>
+    <div class="mt-4 flex items-center gap-3">
+        <%= link_to t("tasks.index.show"), @task, class: "text-sm text-gray-500 hover:text-gray-700 transition-colors" %>
+        <span class="text-gray-300">|</span>
+        <%= link_to t(".back_to_tasks"), tasks_path, class: "text-sm text-gray-500 hover:text-gray-700 transition-colors" %>
+    </div>
 </div>
