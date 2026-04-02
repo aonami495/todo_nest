@@ -59,7 +59,7 @@ end
 gem "rails-i18n"
 
 group :test do
-  gem "minitest", "< 6"
+  gem "minitest", "< 7"
 end
 
 gem "tailwindcss-rails", "~> 4.4"
