@@ -1,13 +1,14 @@
 <% content_for :title, t("tasks.new.title") %>
 
 <div class="max-w-2xl mx-auto">
-    <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
-        <h1 class="text-xl font-bold text-gray-900 mb-6"><%= t("tasks.new.title") %></h1>
+    <nav class="flex items-center gap-2 text-sm text-slate-500 mb-6">
+        <%= link_to t("tasks.index.heading"), tasks_path, class: "hover:text-indigo-600 transition-colors" %>
+        <svg class="w-4 h-4 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <span class="text-slate-900 font-medium"><%= t("tasks.new.title") %></span>
+    </nav>
 
+    <div class="bg-white rounded-xl border border-slate-200/60 shadow-sm p-6">
+        <h1 class="text-xl font-bold text-slate-900 mb-6"><%= t("tasks.new.title") %></h1>
         <%= render "form", task: @task %>
-    </div>
-
-    <div class="mt-4">
-        <%= link_to t("tasks.new.back_to_tasks"), tasks_path, class: "text-sm text-gray-500 hover:text-gray-700 transition-colors" %>
     </div>
 </div>

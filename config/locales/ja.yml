@@ -11,15 +11,21 @@ ja:
     index:
       title: タスク一覧
       heading: タスク一覧
-      new_task: タスクを作成する
+      new_task: タスクを作成
       show: 詳細を見る
+      count:
+        zero: タスクなし
+        one: "%{count}件のタスク"
+        other: "%{count}件のタスク"
+      empty: タスクがありません
+      empty_hint: 右上の「タスクを作成」から新しいタスクを追加しましょう
     show:
       title: タスク詳細
       edit_task: 編集する
       back_to_tasks: 一覧に戻る
       delete_task: 削除する
     new:
-      title: 新しいタスクを作成する
+      title: 新しいタスクを作成
       back_to_tasks: 一覧に戻る
     edit:
       edit_task: タスク編集
@@ -40,6 +46,13 @@ ja:
         due_on_asc: 期限が早い順
         priority_desc: 優先度が高い順
         created_at_desc: 作成日が新しい順
+    form:
+      title_placeholder: タスクのタイトルを入力
+      description_placeholder: タスクの詳細を入力（任意）
+    due:
+      overdue: 期限切れ
+      today: 今日まで
+      tomorrow: 明日まで
   activerecord:
     models:
       task: タスク
@@ -50,6 +63,7 @@ ja:
         due_on: 期限日
         status: ステータス
         priority: 優先度
+        created_at: 作成日
         statuses:
           todo: 未着手
           doing: 進行中
